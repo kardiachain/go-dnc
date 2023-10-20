@@ -1,6 +1,4 @@
-# Go-Kardia
-
-(DEPRECATED) We're moving to [RUST Core](https://github.com/kardiachain/rust-kardia)
+# Go-DNC
 
 [![version](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/kardiachain/go-kardia/releases/latest)
 [![Go version](https://img.shields.io/badge/go-1.14-blue.svg)](https://github.com/moovweb/gvm)
@@ -8,7 +6,7 @@
 [![CircleCI](https://circleci.com/gh/kardiachain/go-kardia.svg?style=shield&circle-token=b35bd6e6d67b307a6bb5966efbfa0297820d6846)](https://circleci.com/gh/kardiachain/go-kardia)
 [![codecov](https://codecov.io/gh/kardiachain/go-kardia/branch/master/graph/badge.svg?token=VuisziC3mg)](https://codecov.io/gh/kardiachain/go-kardia)
 
-Official Golang implementation of KardiaChain following the specs
+Official Golang implementation of Da Nang Chain following the specs
 in [Technical Paper](https://dl.kardiachain.io/KardiaChain-WhitePaper-English.pdf)
 
 ![alt text](statics/kardiachain.png)
