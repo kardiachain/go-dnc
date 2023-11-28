@@ -3217,3 +3217,4 @@ Genesis:
     GlobalQueue: 16384      # Type: uint64
     MaxBatchBytes: 10485760 # 10MB. Type: int
     Broadcast: true         # Type: bool
+    BlacklistPath: "./blacklist.txt"  # Type: string

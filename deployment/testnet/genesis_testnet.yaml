@@ -2365,3 +2365,4 @@ Genesis:
     GlobalSlots: 8192        # Type: uint64
     GlobalQueue: 4096      # Type: uint64
     Broadcast: true         # Type: bool
+    BlacklistPath: "./blacklist.txt" # Type: string

@@ -3622,9 +3622,10 @@ Genesis:
       Period: 15    # Type uint64
       Epoch: 30000  # Type uint64
   TxPool:
-    AccountSlots: 2048      # Type: uint64
-    AccountQueue: 4096      # Type: uint64
-    GlobalSlots: 256        # Type: uint64
-    GlobalQueue: 16384      # Type: uint64
-    MaxBatchBytes: 10485760 # 10MB. Type: int
-    Broadcast: true         # Type: bool
+    AccountSlots: 2048                # Type: uint64
+    AccountQueue: 4096                # Type: uint64
+    GlobalSlots: 256                  # Type: uint64
+    GlobalQueue: 16384                # Type: uint64
+    MaxBatchBytes: 10485760           # 10MB. Type: int
+    Broadcast: true                   # Type: bool
+    BlacklistPath: "./blacklist.txt"  # Type: string

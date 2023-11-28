@@ -100,11 +100,12 @@ func (c *Config) getTxPoolConfig() tx_pool.TxPoolConfig {
 		return tx_pool.DefaultTxPoolConfig
 	}
 	return tx_pool.TxPoolConfig{
-		AccountSlots: txPool.AccountSlots,
-		AccountQueue: txPool.AccountQueue,
-		GlobalSlots:  txPool.GlobalSlots,
-		GlobalQueue:  txPool.GlobalQueue,
-		Broadcast:    txPool.Broadcast,
+		AccountSlots:  txPool.AccountSlots,
+		AccountQueue:  txPool.AccountQueue,
+		GlobalSlots:   txPool.GlobalSlots,
+		GlobalQueue:   txPool.GlobalQueue,
+		Broadcast:     txPool.Broadcast,
+		BlacklistPath: txPool.BlacklistPath,
 	}
 }
 

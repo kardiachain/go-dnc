@@ -21,6 +21,7 @@ services:
         ipv4_address: 172.20.0.2
     volumes:
       - ./node1.yaml:/go/bin/node1.yaml
+      - ./blacklist.txt:/go/bin/blacklist.txt
       - .:/root/.kardia
     command: [ "--network", "mainnet", "--node","node1.yaml" ]
     logging:
@@ -39,6 +40,7 @@ services:
         ipv4_address: 172.20.0.3
     volumes:
       - ./node2.yaml:/go/bin/node2.yaml
+      - ./blacklist.txt:/go/bin/blacklist.txt
       - ./:/root/.kardia
     command: [ "--network", "mainnet", "--node","node2.yaml" ]
     logging:
@@ -57,6 +59,7 @@ services:
         ipv4_address: 172.20.0.4
     volumes:
       - ./node3.yaml:/go/bin/node3.yaml
+      - ./blacklist.txt:/go/bin/blacklist.txt
       - ./:/root/.kardia
     command: [ "--network", "mainnet", "--node","node3.yaml" ]
     logging:
