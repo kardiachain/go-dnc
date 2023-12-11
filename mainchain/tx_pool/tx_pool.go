@@ -52,17 +52,12 @@ const (
 	// to validate whether they fit into the pool or not.
 	txMaxSize = 4 * txSlotSize // 128KB
 
-	UpdateBlacklistInterval        uint64 = 50 // blocks since last update
-	blacklistURL                          = "https://raw.githubusercontent.com/kardiachain/consensus/main/notes"
-	InitialBlacklistRequestTimeout        = 1 * time.Second
-	BlacklistRequestTimeout               = 2 * time.Second
 )
 
 var (
 	evictionInterval    = time.Minute     // Time interval to check for evictable transactions
 	statsReportInterval = 8 * time.Second // Time interval to report transaction pool stats
 
-	Blacklisted = make(map[string]bool) // contains the blacklisted senders
 )
 
 // TxStatus is the current status of a transaction as seen by the pool.
@@ -106,6 +101,9 @@ type TxPoolConfig struct {
 	// Maximum size of a batch transactions
 	MaxTxsBatchSize    int
 	RecvBufferCapacity int
+
+	// Blacklist
+	BlacklistPath string
 }
 
 // DefaultTxPoolConfig contains the default configurations for the transaction
@@ -128,6 +126,8 @@ var DefaultTxPoolConfig = TxPoolConfig{
 	// Maximum bytes for batch of transactions, this must syncup with the proto txpool reactor
 	MaxTxsBatchSize:    2097152, // 2 Mbs
 	RecvBufferCapacity: 2097152, // 2 Mbs
+
+	BlacklistPath: "./blacklist.txt",
 }
 
 // sanitize checks the provided user configurations and changes anything that's
@@ -165,6 +165,10 @@ func (config *TxPoolConfig) sanitize() TxPoolConfig {
 	if conf.Lifetime < 1 {
 		log.Warn("Sanitizing invalid txpool lifetime", "provided", conf.Lifetime, "updated", DefaultTxPoolConfig.Lifetime)
 		conf.Lifetime = DefaultTxPoolConfig.Lifetime
+	}
+	if conf.BlacklistPath == "" {
+		log.Warn("Sanitizing invalid txpool blacklist path", "provided", conf.BlacklistPath, "updated", DefaultTxPoolConfig.BlacklistPath)
+		conf.BlacklistPath = DefaultTxPoolConfig.BlacklistPath
 	}
 	return conf
 }
@@ -250,6 +254,13 @@ func NewTxPool(config TxPoolConfig, chainCfg *configs.ChainConfig, chain blockCh
 		reorgShutdownCh: make(chan struct{}),
 		gasPrice:        new(big.Int).SetUint64(config.PriceLimit),
 	}
+
+	// Initialize the blacklist before make transaction
+	if err := pool.UpdateBlacklistLocal(); err != nil {
+		log.Warn("Failed to update blacklist", "err", err)
+	}
+	log.Info("Updated blacklisted addresses", "addresses", StringifyBlacklist())
+
 	pool.locals = newAccountSet(pool.signer)
 	for _, addr := range config.Locals {
 		log.Info("Setting new local account", "address", addr)

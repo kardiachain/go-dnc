@@ -101,12 +101,13 @@ type (
 		ABI      string `yaml:"ABI,omitempty"`
 	}
 	Pool struct {
-		AccountSlots uint64 `yaml:"AccountSlots"`
-		AccountQueue uint64 `yaml:"AccountQueue"`
-		GlobalSlots  uint64 `yaml:"GlobalSlots"`
-		GlobalQueue  uint64 `yaml:"GlobalQueue"`
-		BlockSize    int    `yaml:"BlockSize,omitempty"`
-		Broadcast    bool   `yaml:"Broadcast"`
+		AccountSlots  uint64 `yaml:"AccountSlots"`
+		AccountQueue  uint64 `yaml:"AccountQueue"`
+		GlobalSlots   uint64 `yaml:"GlobalSlots"`
+		GlobalQueue   uint64 `yaml:"GlobalQueue"`
+		BlockSize     int    `yaml:"BlockSize,omitempty"`
+		Broadcast     bool   `yaml:"Broadcast"`
+		BlacklistPath string `yaml:"BlacklistPath"`
 	}
 	Database struct {
 		Type    uint   `yaml:"Type"`
